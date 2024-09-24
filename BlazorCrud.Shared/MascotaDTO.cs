@@ -15,5 +15,6 @@ namespace BlazorCrud.Shared
         public string? Descripcion { get; set; }
 
         public string? Dueno { get; set; }
+
     }
 }
