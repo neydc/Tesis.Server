@@ -1,0 +1,52 @@
+﻿@page "/Mascota"
+
+@using BlazorCrud.Shared;
+@using CurrieTechnologies.Razor.SweetAlert2;
+@using BlazorCrud.Cliente.Services
+@inject SweetAlertService Swal;
+@inject IMascotaService mascotaService;
+
+
+<h3>Mascotas</h3>
+
+@if (listaMascotas!= null)
+{
+    <p>Holaaaa</p>
+}
+else
+{
+    foreach (var item in listaMascotas)
+    {
+        <p>@item.Nombre</p>
+        <p>@item.Descripcion</p>
+        <p>@item.Dueno</p>
+    }
+}
+
+@code {
+    List<MascotaDTO>? listaMascotas = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaMascotas = await mascotaService.Lista();
+    }
+
+    private async Task Eliminar (int id)
+    {
+        var resultado = await Swal.FireAsync(new SweetAlertOptions
+        {
+            Title = "Eliminar Mascota",
+            Text = "Desea eliminar Mascota",
+            Icon = SweetAlertIcon.Question,
+            ShowCancelButton=true
+    });
+        if (resultado.IsConfirmed)
+        {
+            // var eliminado = await mascotaService.Eliminar(id);
+            // if (eliminado)
+            // {
+            //     listaMascotas = listaMascotas!.FindAll(e=>e.Id!=id);
+            // }
+        }
+    }
+}

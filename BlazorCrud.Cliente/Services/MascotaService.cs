@@ -20,8 +20,10 @@ namespace BlazorCrud.Cliente.Services
                 return result.Valor;
             }
             else {
-                throw new Exception(result.Mensaje);
+                throw new Exception(result.Mensaje); 
             }
         }
+
+
     }
 }

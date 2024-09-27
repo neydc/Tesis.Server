@@ -11,12 +11,14 @@ namespace Tesis.Server.Controller
     public class MascotaController : ControllerBase
     {
         private readonly TesisContext _dbcontext;
-        public MascotaController(TesisContext dbContext) {
+
+        public MascotaController(TesisContext dbContext)
+        {
             _dbcontext = dbContext;
         }
 
         [HttpGet]
-        [Route("Lista")] 
+        [Route("Lista")]
         public async Task<IActionResult> Lista()
         {
             var responseApi = new ResponseAPI<List<MascotaDTO>>();
@@ -28,10 +30,10 @@ namespace Tesis.Server.Controller
                 {
                     listaMascotas.Add(new MascotaDTO
                     {
-                        Id=item.Id,
-                        Nombre=item.Nombre, 
-                        Descripcion=item.Descripcion,
-                        Dueno=item.Dueno,
+                        Id = item.Id,
+                        Nombre = item.Nombre,
+                        Descripcion = item.Descripcion,
+                        Dueno = item.Dueno,
                     });
                 }
                 responseApi.EsCorrecto = true;
@@ -45,6 +47,11 @@ namespace Tesis.Server.Controller
             }
 
             return Ok(responseApi);
+        }
+
+        private async Task Eliminar(int id)
+        {
+
         }
     }
 }
