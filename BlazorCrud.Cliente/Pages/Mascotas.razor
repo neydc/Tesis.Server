@@ -9,17 +9,18 @@
 
 <h3>Mascotas</h3>
 
-@if (listaMascotas!= null)
+@if (listaMascotas== null)
 {
-    <p>Holaaaa</p>
+    <p>Agregue su primera mascota</p>
 }
 else
 {
-    foreach (var item in listaMascotas)
+    foreach (var item in   listaMascotas)
     {
         <p>@item.Nombre</p>
         <p>@item.Descripcion</p>
         <p>@item.Dueno</p>
+        <br />
     }
 }
 
@@ -42,11 +43,11 @@ else
     });
         if (resultado.IsConfirmed)
         {
-            // var eliminado = await mascotaService.Eliminar(id);
-            // if (eliminado)
-            // {
-            //     listaMascotas = listaMascotas!.FindAll(e=>e.Id!=id);
-            // }
+            var eliminado = await mascotaService.Eliminar(id);
+            if (eliminado)
+            { 
+                 listaMascotas = listaMascotas!.FindAll(e=>e.Id!=id);
+            }
         }
     }
 }

@@ -11,7 +11,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5045") });
 
+
+
 builder.Services.AddScoped<IMascotaService,MascotaService>();
+
 
 builder.Services.AddSweetAlert2();
 
