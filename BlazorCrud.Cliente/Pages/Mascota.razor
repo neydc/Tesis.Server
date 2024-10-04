@@ -1,0 +1,76 @@
+﻿@page "/mascota"
+@page "/mascota/{idMascotaEditar:int}"
+
+@using BlazorCrud.Shared;
+@using BlazorCrud.Cliente.Services
+@inject IMascotaService mascotaService;
+@inject NavigationManager navegacion;
+
+<h3>@titulo</h3>
+<EditForm Model="mascota" OnInvalidSubmit="onValidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <InputText class="form-control" @bind-Value="mascota.Nombre"></InputText>
+        <ValidationMessage For="@(()=>mascota.Nombre)"></ValidationMessage>
+    </div>
+    <div class=" mb-3">
+        <label class="form-label">Dueño</label>
+        <InputText class="form-control" @bind-Value="mascota.Dueno"></InputText>
+        <ValidationMessage For="@(()=>mascota.Dueno)"></ValidationMessage>
+    </div>
+    <div class=" mb-3">
+        <label class="form-label">Descripción</label>
+        <InputText class="form-control" @bind-Value="mascota.Descripcion"></InputText>
+        <ValidationMessage For="@(()=>mascota.Descripcion)"></ValidationMessage>
+    </div>
+    <button class="btn btn-primary" type="submit"> 
+        @btnTexto
+    </button>
+    <a class="btn btn-warning" href="Mascotas">Volver</a>
+</EditForm> 
+
+@code {
+    [Parameter]
+    public int idMascotaEditar { get; set; } = 0;
+
+    string titulo = string.Empty;
+    string btnTexto = string.Empty;
+
+    MascotaDTO mascota = new MascotaDTO();
+    List<MascotaDTO> listMascotas = new List<MascotaDTO>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (idMascotaEditar!=0)
+        {
+            mascota = await mascotaService.Buscar(idMascotaEditar);
+            btnTexto = "Actualizar ";
+            titulo = "Editar Mascota";
+        }else
+        {
+            btnTexto = "Guardar";
+            titulo = "Nueva Mascota";
+        }
+
+        listMascotas = await mascotaService.Lista();
+    }
+
+    private async Task onValidSubmit()
+    {
+        int idDevuelto = 0;
+        if (idMascotaEditar==0)
+        {
+            idDevuelto = await mascotaService.Guardar(mascota);
+        }else
+        {
+            idDevuelto = await mascotaService.Editar(mascota);
+        }
+
+        if (idDevuelto!=0)
+        {
+            navegacion.NavigateTo("/Mascotas");
+        }
+    }
+}

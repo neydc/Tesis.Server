@@ -1,14 +1,14 @@
-﻿@page "/Mascotas"
+﻿@page "/clientes"
 
 @using BlazorCrud.Shared;
 @using CurrieTechnologies.Razor.SweetAlert2;
 @using BlazorCrud.Cliente.Services
 @inject SweetAlertService Swal;
-@inject IMascotaService mascotaService;
+@inject IClienteService clienteService;
 
 
-<h3>Mascotas</h3>
-<a class="btn btn-success btn-sm mb-3" href="mascota">Agregar Mascota</a>  
+<h3>Clientes</h3>
+<a class="btn btn-success btn-sm mb-3" href="mascota">Agregar Cliente</a>  
 
 <table class="table">
     <thead>
@@ -19,7 +19,7 @@
         </tr>
     </thead> 
     <tbody>
-        @if (listaMascotas == null)
+        @if (listaClientes == null)
         {
             <tr>
                 <td colspan="5" align="center">
@@ -29,12 +29,12 @@
         }
         else
         {
-            foreach (var item in listaMascotas)
+            foreach (var item in listaClientes)
             {
                 <tr>
-                    <td>@item.Nombre</td>
-                    <td>@item.Dueno</td>
-                    <td>@item.Descripcion</td>
+                    <td>@item.Id</td>
+                    <td>@item.Correo</td>
+                    <td>@item.Contrasenia</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="mascota/@item.Id">
                             @* <i class="oi oi-pencil"></i> *@
@@ -57,11 +57,11 @@
 
 
 @code {
-    List<MascotaDTO>? listaMascotas = null;
+    List<ClienteDTO>? listaClientes = null;
 
     protected override async Task OnInitializedAsync()
     {
-        listaMascotas = await mascotaService.Lista();
+        listaClientes = await clienteService.Lista();
     }
 
     private async Task Eliminar (int id)
@@ -75,17 +75,17 @@
         });
         if (resultado.IsConfirmed)
         {
-            var eliminado = await mascotaService.Eliminar(id);
+            var eliminado = await clienteService.Eliminar(id);
             if (eliminado)
             { 
-               listaMascotas = listaMascotas!.FindAll(e=>e.Id!=id);
+                listaClientes = listaClientes!.FindAll(e => e.Id != id);
             }
         }
     }
 
     private async Task Editar(int id)
     {
-        var mascota = listaMascotas!.FirstOrDefault(e => e.Id == id);
+        var mascota = listaClientes!.FirstOrDefault(e => e.Id == id);
         if (mascota!=null)
         {
             var resultado = await Swal.FireAsync(new SweetAlertOptions
@@ -93,7 +93,7 @@
                     Title = "Editar Mascota",
                     Text = "Ingrese el nuevo nombre de la Mascota",
                     Input = SweetAlertInputType.Text,
-                    InputPlaceholder = mascota.Nombre,
+                    InputPlaceholder = mascota.Correo,
                     ShowCancelButton = true,
                     ConfirmButtonText = "Guardar",
                     CancelButtonText = "Cancelar",

@@ -1,0 +1,75 @@
+﻿@page "/cliente"
+@page "/cliente/{idMascotaEditar:int}"
+
+@using BlazorCrud.Shared;
+@using BlazorCrud.Cliente.Services
+@inject IClienteService clienteService;
+@inject NavigationManager navegacion;
+
+<h3>@titulo</h3>
+
+<EditForm Model="cliente" OnInvalidSubmit="onValidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <InputText class="form-control" @bind-Value="cliente.Correo"></InputText>
+        <ValidationMessage For="@(()=>cliente.Correo)"></ValidationMessage>
+    </div>
+    <div class=" mb-3">
+        <label class="form-label">Dueño</label>
+        <InputText class="form-control" @bind-Value="cliente.Contrasenia"></InputText>
+        <ValidationMessage For="@(()=>cliente.Contrasenia)"></ValidationMessage>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">
+        @btnTexto
+    </button>
+    <a class="btn btn-warning" href="Mascotas">Volver</a>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int idClienteEditar { get; set; } = 0;
+
+    string titulo = string.Empty;
+    string btnTexto = string.Empty;
+
+    ClienteDTO cliente = new ClienteDTO();
+    List<ClienteDTO> listClientes = new List<ClienteDTO>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (idClienteEditar != 0)
+        {
+            cliente = await clienteService.Buscar(idClienteEditar);
+            btnTexto = "Actualizar ";
+            titulo = "Editar";
+        }
+        else
+        {
+            btnTexto = "Guardar";
+            titulo = "Nueva ";
+        }
+
+        listClientes = await clienteService.Lista();
+    }
+
+    private async Task onValidSubmit()
+    {
+        int idDevuelto = 0;
+        if (idClienteEditar == 0)
+        {
+            idDevuelto = await clienteService.Guardar(cliente);
+        }
+        else
+        {
+            idDevuelto = await clienteService.Editar(cliente);
+        }
+
+        if (idDevuelto != 0)
+        {
+            navegacion.NavigateTo("/Clientes");
+        }
+    }
+}

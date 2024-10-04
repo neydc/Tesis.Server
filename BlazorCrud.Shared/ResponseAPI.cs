@@ -10,6 +10,6 @@ namespace BlazorCrud.Shared
     {
         public bool EsCorrecto{ get; set; }
         public T? Valor { get; set; }
-        public string Mensaje{ get; set; }
+        public string ?Mensaje{ get; set; }
     }
 }

@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace BlazorCrud.Shared
 {
-    public class MascotaDTO
+    public class ClienteDTO
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
-        public string? Nombre { get; set; } = null;
+        public string ?Correo { get; set; }
         [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
-        public string? Descripcion { get; set; }
-        [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
-        public string? Dueno { get; set; }
+        public string? Contrasenia { get; set; }
     }
 }
