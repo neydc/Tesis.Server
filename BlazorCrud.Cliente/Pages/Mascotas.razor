@@ -6,6 +6,8 @@
 @inject SweetAlertService Swal;
 @inject IMascotaService mascotaService;
 
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
 
 <h3>Mascotas</h3>
 <a class="btn btn-success btn-sm mb-3" href="mascota">Agregar Mascota</a>  

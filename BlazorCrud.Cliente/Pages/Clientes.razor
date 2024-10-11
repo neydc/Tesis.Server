@@ -6,6 +6,9 @@
 @inject SweetAlertService Swal;
 @inject IClienteService clienteService;
 
+@using Microsoft.AspNetCore.Authorization;
+@attribute [Authorize]
+
 
 <h3>Clientes</h3>
 <a class="btn btn-success btn-sm mb-3" href="mascota">Agregar Cliente</a>  
@@ -68,8 +71,8 @@
     {
         var resultado = await Swal.FireAsync(new SweetAlertOptions
         {
-            Title = "Eliminar Mascota",
-            Text = "Desea eliminar Mascota",
+            Title = "Eliminar Cliente",
+            Text = "Desea eliminar Cliente",
             Icon = SweetAlertIcon.Question,
             ShowCancelButton=true
         });

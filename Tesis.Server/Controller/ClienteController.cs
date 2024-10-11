@@ -152,20 +152,20 @@ namespace Tesis.Server.Controller
             var responseApi = new ResponseAPI<int>();
             try
             {
-                var dbMascota = await _dbcontext.Mascota.FirstOrDefaultAsync(x => x.Id == id);
+                var dbCliente = await _dbcontext.Cliente.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (dbMascota != null)
+                if (dbCliente != null)
                 {
-                    _dbcontext.Mascota.Remove(dbMascota);
+                    _dbcontext.Cliente.Remove(dbCliente);
                     await _dbcontext.SaveChangesAsync();
 
                     responseApi.EsCorrecto = true;
-                    responseApi.Valor = dbMascota.Id;
+                    responseApi.Valor = dbCliente.Id;
                 }
                 else
                 {
                     responseApi.EsCorrecto = false;
-                    responseApi.Mensaje = " Mascota no encontrada";
+                    responseApi.Mensaje = " Cliente no encontrada";
                 }
             }
             catch (Exception ex)
