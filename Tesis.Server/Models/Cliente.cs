@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Correo{ get; set; }
         public string Contrasenia{ get; set; }
+        public string Nombres{ get; set; }
     }
 }

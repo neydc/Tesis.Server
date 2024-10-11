@@ -14,5 +14,6 @@ namespace BlazorCrud.Shared
         public string ?Correo { get; set; }
         [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
         public string? Contrasenia { get; set; }
+        public string? Nombres{ get; set; }
     }
 }
