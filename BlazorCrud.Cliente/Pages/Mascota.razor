@@ -11,7 +11,7 @@
 
 
 <h3>@titulo</h3>
-<EditForm Model="mascota" OnInvalidSubmit="onValidSubmit">
+<EditForm Model="mascota" OnValidSubmit="onValidSubmit">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <div class="mb-3">
         <label class="form-label">Nombre</label>
@@ -31,7 +31,7 @@
     <button class="btn btn-primary" type="submit"> 
         @btnTexto
     </button>
-    <a class="btn btn-warning" href="Mascotas">Volver</a>
+    <a class="btn btn-warning" href="mascotas">Volver</a>
 </EditForm> 
 
 @code {
@@ -74,7 +74,7 @@
 
         if (idDevuelto!=0)
         {
-            navegacion.NavigateTo("/Mascotas");
+            navegacion.NavigateTo("/mascotas");
         }
     }
 }

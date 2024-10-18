@@ -25,17 +25,21 @@ public partial class TesisContext : DbContext
     {
         modelBuilder.Entity<Mascota>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Descripcion).HasMaxLength(90);
             entity.Property(e => e.Dueno).HasMaxLength(90);
             entity.Property(e => e.Nombre).HasMaxLength(90);
         });
 
         modelBuilder.Entity<Cliente>(entity =>
-        {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+        {   
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Correo);
             entity.Property(e => e.Contrasenia);
+            entity.Property(e => e.Nombres);
+            entity.Property(e => e.Direccion);
+            entity.Property(e => e.Celular);
+            entity.Property(e => e.RolUser);
         });
 
         OnModelCreatingPartial(modelBuilder);

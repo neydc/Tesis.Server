@@ -87,10 +87,11 @@ namespace Tesis.Server.Controller
             var responseApi = new ResponseAPI<int>();
             try
             {
-                var dbMascota = new Mascota{ 
-                Nombre = mascota.Nombre,
-                Dueno = mascota.Dueno,
-                Descripcion = mascota.Descripcion,
+                var dbMascota = new Mascota
+                {
+                    Nombre = mascota.Nombre,
+                    Dueno = mascota.Dueno,
+                    Descripcion = mascota.Descripcion
                 };
 
                 _dbcontext.Mascota.Add(dbMascota);

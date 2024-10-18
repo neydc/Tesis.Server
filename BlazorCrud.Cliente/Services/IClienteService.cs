@@ -9,6 +9,7 @@ namespace BlazorCrud.Cliente.Services
     Task<ClienteDTO> Buscar(int id);
 
     Task<int> Guardar(ClienteDTO cliente);
+    Task<int> Registrarse(ClienteDTO cliente);
     Task<int> Editar(ClienteDTO cliente);
     Task<bool> Eliminar(int id);
     }

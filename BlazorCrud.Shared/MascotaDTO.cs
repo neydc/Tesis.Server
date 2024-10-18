@@ -12,9 +12,9 @@ namespace BlazorCrud.Shared
         public int Id { get; set; }
         [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
         public string? Nombre { get; set; } = null;
-        [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
+        [Required(ErrorMessage = "Ingrese una descripción en el campo{0}")]
         public string? Descripcion { get; set; }
-        [Required(ErrorMessage = "Ingrese un nombre en el campo{0}")]
+        [Required(ErrorMessage = "Ingrese el nombre del dueño en el campo{0}")]
         public string? Dueno { get; set; }
     }
 }

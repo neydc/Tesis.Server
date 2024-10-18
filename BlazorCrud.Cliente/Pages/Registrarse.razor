@@ -1,0 +1,98 @@
+﻿@page "/Registrarse"
+@layout LoginLayout
+
+@inject HttpClient httpClient
+@using BlazorCrud.Shared
+@using BlazorCrud.Cliente.Services
+@inject IClienteService clienteService;
+@using BlazorCrud.Cliente.ExtensionesLogin
+@inject NavigationManager navegacion;
+
+<div class="row mt-5">
+    <div class="col-lg-4 offset-4 border">
+        <div class="mb-3 text-center">
+            <EditForm Model="cliente" OnValidSubmit="onValidSubmit">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="mb-3 text-center">
+                    <h3>Registrarse</h3>
+                </div>
+                <div class=" mb-3">
+                    <label class="form-label">Nombres y apellidos</label>
+                    <InputText class="form-control" @bind-Value="cliente.Nombres"></InputText>
+                    <ValidationMessage For="@(()=>cliente.Nombres)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Celular</label>
+                    <InputText class="form-control" @bind-Value="cliente.Celular"></InputText>
+                    <ValidationMessage For="@(()=>cliente.Celular)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <InputText class="form-control" @bind-Value="cliente.Direccion"></InputText>
+                    <ValidationMessage For="@(()=>cliente.Celular)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Correo</label>
+                    <InputText class="form-control" @bind-Value="cliente.Correo"></InputText>
+                    <ValidationMessage For="@(()=>cliente.Correo)"></ValidationMessage>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <InputText type="password" class="form-control" @bind-Value="cliente.Contrasenia"></InputText>
+                    <ValidationMessage For="@(()=>cliente.Contrasenia)"></ValidationMessage>
+                </div>
+
+               
+                <div class="mb-3">
+                    <label class="form-label">Rol</label>
+                    <select class="form-control" @bind="cliente.RolUser">
+                        <option value="">Seleccionar...</option>
+                        <option value="Usuario">Usuario</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                    <ValidationMessage For="@(()=>cliente.Nombres)"></ValidationMessage>
+                </div>
+
+                <div class="mb-3">
+                    <button @onclick="Register" class="btn btn-primary">Guardar</button>
+                </div>
+                <a class="btn btn-warning" href="/">Volver</a>
+            </EditForm>
+
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public int idClienteEditar { get; set; } = 0;
+
+    ClienteDTO cliente = new ClienteDTO();
+    private string mensajeError = string.Empty; // Para almacenar el mensaje de error
+
+    private async Task Register()
+    {
+        mensajeError = string.Empty; // Reiniciar el mensaje de error al intentar iniciar sesión
+
+        var loginResponse = await httpClient.PostAsJsonAsync("api/Usuario/Registrarse", cliente);
+        navegacion.NavigateTo("");
+
+    }
+    private async Task onValidSubmit()
+    {
+        int idDevuelto = 0;
+
+        if (idDevuelto != 0)
+        {
+            navegacion.NavigateTo("/");
+        }
+        else
+        {
+            // Capturar otros posibles errores
+            mensajeError = "Ocurrió un error inesperado al intentar iniciar sesión.";
+        }
+    }
+
+}

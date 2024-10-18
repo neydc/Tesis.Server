@@ -10,5 +10,5 @@ namespace BlazorCrud.Shared
     {
         public string Correo { get; set; }
         public string Contrasenia { get; set; }
-    }
+         }
 }

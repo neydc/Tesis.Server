@@ -65,5 +65,16 @@ namespace BlazorCrud.Cliente.Services
                 throw new Exception(response.Mensaje);
         }
 
+        public async Task<int> Registrarse(ClienteDTO cliente)
+        {
+            var result = await _http.PostAsJsonAsync($"api/Usuario/Registrarse", cliente);
+            var response = await result.Content.ReadFromJsonAsync<ResponseAPI<int>>();
+
+            if (response!.EsCorrecto)
+                return response.Valor!;
+            else
+                throw new Exception(response.Mensaje);
+        }
+
     }
 }

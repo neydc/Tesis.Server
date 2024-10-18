@@ -85,7 +85,7 @@ namespace Tesis.Server.Controller
                 var dbMascota = new Cliente
                 {
                     Correo = cliente.Correo,
-                    Contrasenia = cliente.Contrasenia,
+                    Contrasenia = cliente.Contrasenia
                 };
 
                 _dbcontext.Cliente.Add(dbMascota);
