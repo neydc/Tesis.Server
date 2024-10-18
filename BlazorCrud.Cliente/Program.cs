@@ -22,6 +22,7 @@ builder.Services.AddSweetAlert2();
 
 builder.Services.AddScoped<IMascotaService,MascotaService>();
 builder.Services.AddScoped<IClienteService,ClienteService>();
+builder.Services.AddScoped<IHistorialService,HistorialService>();
 
 //Login 
 builder.Services.AddBlazoredSessionStorage();

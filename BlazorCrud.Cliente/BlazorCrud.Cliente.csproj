@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorCrud.Shared\BlazorCrud.Shared.csproj" />
+    <ProjectReference Include="..\Tesis.Server\Tesis.Server.csproj" />
   </ItemGroup>
 
 </Project>

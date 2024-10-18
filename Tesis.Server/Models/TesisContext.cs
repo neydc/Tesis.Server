@@ -17,6 +17,7 @@ public partial class TesisContext : DbContext
 
     public virtual DbSet<Mascota> Mascota { get; set; }
     public virtual DbSet<Cliente> Cliente{ get; set; }
+    public virtual DbSet<Historial> Historial{ get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     { }
@@ -40,6 +41,15 @@ public partial class TesisContext : DbContext
             entity.Property(e => e.Direccion);
             entity.Property(e => e.Celular);
             entity.Property(e => e.RolUser);
+        });
+
+        modelBuilder.Entity<Historial>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Descripcion);
+            entity.Property(e => e.Fecha);
+            entity.Property(e => e.IdMascota);
+            entity.Property(e => e.IdCliente);
         });
 
         OnModelCreatingPartial(modelBuilder);
